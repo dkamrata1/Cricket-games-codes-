@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Cricket Game Booking and Management</title>
+    <style>
+      /* CSS for styling the website */
+      body {
+        font-family: Arial, sans-serif;
+      }
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+      header {
+        background-color: #f2f2f2;
+        padding: 20px;
+      }
+      header h1 {
+        margin: 0;
+      }
+      nav {
+        background-color: #333;
+        color: #fff;
+        padding: 10px;
+      }
+      nav a {
+        color: #fff;
+        text-decoration: none;
+        margin-right: 10px;
+      }
+      main {
+        padding: 20px;
+      }
+      .game {
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin-bottom: 20px;
+      }
+      .game h3 {
+        margin: 0;
+      }
+      footer {
+        background-color: #f2f2f2;
+        padding: 10px;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Cricket Game Booking and Management</h1>
+      </header>
+      <nav>
+        <a href="#">Home</a>
+        <a href="#">Book a Game</a>
+        <a href="#">View Bookings</a>
+      </nav>
+      <main>
+        <h2>Available Games</h2>
+        <div id="games" class="games">
+          <!-- This section will be populated by JavaScript -->
+        </div>
+      </main>
+      <footer>
+        <p>Copyright ©2022 Cricket Game Booking and Management</p>
+      </footer>
+    </div>
+    <script>
+      // JavaScript code to load the available games
+      fetch("/api/games")
+        .then((response) => response.json())
+        .then((games) => {
+          const gamesContainer = document.getElementById("games");
+          games.forEach((game) => {
+            const gameElem = document.createElement("div");
+            gameElem.classList.add("game");
+            gameElem.innerHTML = `<h3>${game.name}</h3><p>Date: ${game.date}</p><p>Location: ${game.location}</p><button class="book-btn">Book</button>`;
+            gamesContainer.appendChild(gameElem);
+          });
+        });
+    </script>
+  </body>
+</html>
